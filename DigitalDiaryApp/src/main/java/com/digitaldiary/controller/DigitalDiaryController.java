@@ -64,4 +64,11 @@ public class DigitalDiaryController {
 		
 		
 	}
+	
+	@GetMapping("/getAllCategory")
+	public ResponseEntity<List<Categories>> getallCategory(){
+		
+		List<Categories> categories = this.entrieService.getAllCategories();
+		return new ResponseEntity<List<Categories>>(categories,HttpStatus.OK);
+	}
 }
