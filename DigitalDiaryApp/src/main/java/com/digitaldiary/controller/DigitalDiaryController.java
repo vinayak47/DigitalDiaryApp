@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digitaldiary.entities.Categories;
 import com.digitaldiary.entities.Entries;
 import com.digitaldiary.service.DiaryEntrieService;
 
@@ -25,7 +26,7 @@ public class DigitalDiaryController {
 	
 	
 	@PostMapping("/addEntry")
-	public ResponseEntity<Entries> addNewEntry(@RequestBody Entries entries){
+	public ResponseEntity<Entries> addNewEntry(@RequestBody Entries entries) throws Exception{
 		
 		Entries addNewEntries = this.entrieService.addNewEntries(entries);
 		return new ResponseEntity<Entries>(addNewEntries,HttpStatus.OK);
@@ -53,5 +54,14 @@ public class DigitalDiaryController {
 		
 		this.entrieService.deleteEntry(id);
 		return new ResponseEntity<String>("Entry deleted successfully for id "+id,HttpStatus.OK);
+	}
+	
+	@PostMapping("/addCategoryName")
+	public ResponseEntity<Categories> addNewCategory(@RequestBody Categories categories){
+		
+		Categories addNewCategories = this.entrieService.addNewCategories(categories);
+		return new ResponseEntity<Categories>(addNewCategories,HttpStatus.OK);
+		
+		
 	}
 }

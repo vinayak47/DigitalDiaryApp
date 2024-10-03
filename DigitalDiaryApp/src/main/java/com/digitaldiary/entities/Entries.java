@@ -28,18 +28,33 @@ public class Entries {
 
 	@Column(name = "date_modified", nullable = false)
 	private LocalDateTime dateModified;
+	
+	 @Column(name = "category_id", nullable = false)
+	    private int categoryId;
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public Entries() {
 
 	}
 
-	public Entries(int id, String title, String content, LocalDateTime dateCreated, LocalDateTime dateModified) {
+	
+
+	public Entries(Integer id, String title, String content, LocalDateTime dateCreated, LocalDateTime dateModified,
+			int categoryId) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.dateCreated = dateCreated;
 		this.dateModified = dateModified;
+		this.categoryId = categoryId;
 	}
 
 	public int getId() {
