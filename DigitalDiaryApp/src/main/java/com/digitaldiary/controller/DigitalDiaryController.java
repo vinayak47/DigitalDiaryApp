@@ -56,6 +56,9 @@ public class DigitalDiaryController {
 		return new ResponseEntity<String>("Entry deleted successfully for id "+id,HttpStatus.OK);
 	}
 	
+	// All Api for categories
+	
+	
 	@PostMapping("/addCategoryName")
 	public ResponseEntity<Categories> addNewCategory(@RequestBody Categories categories){
 		
