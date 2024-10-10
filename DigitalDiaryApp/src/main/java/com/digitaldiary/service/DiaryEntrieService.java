@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.digitaldiary.entities.Categories;
 import com.digitaldiary.entities.Entries;
+import com.digitaldiary.entities.User;
 
 public interface DiaryEntrieService {
 	
@@ -24,5 +25,9 @@ public interface DiaryEntrieService {
 	
 	Categories getCategoriesById(Integer id);
 	
+	
+	 User addUser(User user);
+	 User getUserById(int id);
+	 User getUserByUsername(String username);
 
 }

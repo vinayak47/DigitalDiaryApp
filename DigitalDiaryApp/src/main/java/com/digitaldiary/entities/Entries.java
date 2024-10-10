@@ -31,6 +31,17 @@ public class Entries {
 	
 	 @Column(name = "category_id", nullable = false)
 	    private int categoryId;
+	 
+	  @Column(name = "user_id", nullable = false)
+	    private int userId;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public int getCategoryId() {
 		return categoryId;
@@ -46,8 +57,9 @@ public class Entries {
 
 	
 
+	
 	public Entries(Integer id, String title, String content, LocalDateTime dateCreated, LocalDateTime dateModified,
-			int categoryId) {
+			int categoryId, int userId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -55,6 +67,7 @@ public class Entries {
 		this.dateCreated = dateCreated;
 		this.dateModified = dateModified;
 		this.categoryId = categoryId;
+		this.userId = userId;
 	}
 
 	public int getId() {

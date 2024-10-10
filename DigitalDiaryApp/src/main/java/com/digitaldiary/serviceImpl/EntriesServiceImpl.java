@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.digitaldiary.entities.Categories;
 import com.digitaldiary.entities.Entries;
+import com.digitaldiary.entities.User;
 import com.digitaldiary.exception.DataException;
 import com.digitaldiary.repository.CategoryRepo;
 import com.digitaldiary.repository.DiaryRepo;
+import com.digitaldiary.repository.UserRepository;
 import com.digitaldiary.service.DiaryEntrieService;
 
 @Service
@@ -22,19 +24,26 @@ public class EntriesServiceImpl implements DiaryEntrieService {
 	
 	@Autowired
 	private CategoryRepo categoryRepo;
+	
+	@Autowired
+	private UserRepository repository;
+	
 
 	@Override
 	public Entries addNewEntries(Entries entries) throws Exception {
 		Optional<Categories> findById = categoryRepo.findById(entries.getCategoryId());
+		
+		Optional<User> findById2 = repository.findById(entries.getUserId());
 	//	Categories categories = findById.get();
 		entries.setDateCreated(LocalDateTime.now());
 		entries.setDateModified(LocalDateTime.now());
-		if(findById.isPresent()) {
+		if(findById.isPresent() && findById2.isPresent()) {
 			
 			entries.setCategoryId(entries.getCategoryId());
+			entries.setUserId(entries.getUserId());
 		}else {
 			
-			throw new DataException("category not found");
+			throw new DataException("category not found or user not found !!!");
 		}
 		
 		Entries entry = this.diaryRepo.save(entries);
@@ -91,6 +100,25 @@ public class EntriesServiceImpl implements DiaryEntrieService {
 	public Categories getCategoriesById(Integer id) {
 		Categories orElseThrow = this.categoryRepo.findById(id).orElseThrow();
 		return orElseThrow;
+	}
+
+	@Override
+	public User addUser(User user) {
+		  return repository.save(user);
+	
+	}
+
+	@Override
+	public User getUserById(int id) {
+		Optional<User> findById = this.repository.findById(id);
+		User user = findById.get();
+		return user;
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+	User findByUsername = this.repository.findByUsername(username);
+		return findByUsername;
 	}
 
 }
